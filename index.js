@@ -1,6 +1,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
+const { response } = require('express')
 const app = express()
 
 morgan.token('body', function getId(req) {
@@ -96,8 +97,16 @@ app.delete('/api/notes/:id', (request, response) => {
 
 app.post('/api/notes', (request, response) => {
     const note = request.body
+    notes = notes.concat(note)
     console.log(note)
     response.json(note)
+})
+
+app.put('/api/notes/:id', (request, response) => {
+    const id = Number(request.params.id)
+    const newNote = request.body
+    notes = notes.filter(note => note.id !== id)
+    notes = notes.concat(newNote)
 })
 
 // 这是干啥的
