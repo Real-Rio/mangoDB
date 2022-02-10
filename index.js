@@ -7,6 +7,7 @@ morgan.token('body', function getId(req) {
     return req.body.data
 })
 
+app.use(express.static('build'))
 app.use(cors())
 app.use(express.json())
 app.use(morgan(':body :method :url :status :res[content-length] - :response-time ms')
